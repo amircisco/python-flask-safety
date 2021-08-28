@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block customstyle %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/results-style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="body">
+<span style="font-size:15px;font-weight: bold;margin-top: 10px;">    
+    Dear user, based on entered information, the safety performance level of your site has been evaluated as <b style="color:{{color}};">{{res}}</b> and the scores of each of your safety indicators are as follows
+</span>    
+<table id="itself" class="table table-bordered" style="margin-top: 10px;">
+    <tr style="background-color: black;color: white;opacity:0.7;">
+        <th>Management commitment</th>
+        <th>Rule adherence</th>
+        <th>Safety equipment</th>
+        <th>Training</th>
+        <th>Safety investigation</th>
+        <th>Safety rules</th>
+        <th>Safety employees</th>
+        <th>Hazard awareness</th>
+        <th>Safety budget</th>
+    </tr>
+    <tr style="background-color:lightgray;">
+        {% for i in range(0,lenitself) %}
+            {% if i==6 %}
+                {% if  itself[i] == 0 %}
+                <td>have not</td>
+                {% elif  itself[i] == 1 %}
+                <td>have</td>
+                {% endif %}
+            {% else %}
+                <td><span class="spcheck">{{itself[i]}}</span></td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+{% if len > 0 %}
+<p style="color:gray;font-size:14px;font-weight: bold;">
+    In order to improve the situation, you can use the information of successful sites that their scores are somewhat close to you
+</p>
+<table id="k1" class="table table-bordered">
+    <tr>
+        <th>Management commitment</th>
+        <th>Rule adherence</th>
+        <th>Safety equipment</th>
+        <th>Training</th>
+        <th>Safety investigation</th>
+        <th>Safety rules</th>
+        <th>Safety employees</th>
+        <th>Hazard awareness</th>
+        <th>Safety budget</th>
+    </tr>
+    <tr>
+        {% for i in range(0,len) %}
+            {% if i==6 %}
+                {% if  k1[i] == 0 %}
+                    <td>have not</td>
+                {% elif  k1[i] == 1 %}
+                    <td>have</td>
+                {% endif %}
+            {% else %}
+                <td><span class="spcheck">{{k1[i]}}</span></td>
+            {% endif %}
+        {% endfor %}        
+    </tr>
+    <tr>
+    {% for i in range(0,len) %}
+        {% if i==6 %}
+            {% if  k1[i] == 0 %}
+                <td>No safety personnel required</td>
+            {% elif  k1[i] == 1 %}
+                <td>Needs safety personnel</td>
+            {% endif %}
+        {% else %}
+            {% if k1[i] - itself[i] == 0 %}
+                <td>0</td>
+            {% elif k1[i] - itself[i] > 0 %}
+                <td><img src="{{url_for('static',filename='img/up.jpg')}}" class='imgup'/> <span class="spcheck">{{k1[i] - itself[i]}}</span></td>
+            {% elif k1[i] - itself[i] < 0 %}
+                <td><img src="{{url_for('static',filename='img/down.png')}}" class='imgdown'/> <span class="spcheck">{{itself[i] - k1[i]}}</span></td>
+            {% endif %}
+        {% endif %}
+    {% endfor %} 
+    </tr>
+</table>
+
+<table id="k2" class="table table-bordered">
+    <tr>
+        <th>Management commitment</th>
+        <th>Rule adherence</th>
+        <th>Safety equipment</th>
+        <th>Training</th>
+        <th>Safety investigation</th>
+        <th>Safety rules</th>
+        <th>Safety employees</th>
+        <th>Hazard awareness</th>
+        <th>Safety budget</th>
+    </tr>
+    <tr>
+        {% for i in range(0,len) %}
+            {% if i==6 %}
+                {% if  k2[i] == 0 %}
+                <td>have not</td>
+                {% elif  k2[i] == 1 %}
+                <td>have</td>
+                {% endif %}
+            {% else %}
+                <td><span class="spcheck">{{k2[i]}}</span></td>
+            {% endif %}
+        {% endfor %}        
+    </tr>  
+    <tr>
+        {% for i in range(0,len) %}
+            {% if i==6 %}
+                {% if  k2[i] == 0 %}
+                    <td>No safety personnel required</td>
+                {% elif  k2[i] == 1 %}
+                    <td>Needs safety personnel</td>
+                {% endif %}
+            {% else %}
+                {% if k2[i] - itself[i] == 0 %}
+                    <td>0</td>
+                {% elif k2[i] - itself[i] > 0 %}
+                    <td><img src="{{url_for('static',filename='img/up.jpg')}}" class='imgup'/> <span class="spcheck">{{k2[i] - itself[i]}}</span></td>
+                {% elif k2[i] - itself[i] < 0 %}
+                    <td><img src="{{url_for('static',filename='img/down.png')}}" class='imgdown'/> <span class="spcheck">{{itself[i] - k2[i]}}</span></td>
+                {% endif %}
+            {% endif %}
+        {% endfor %} 
+        </tr>      
+</table>
+
+<table id="k3" class="table table-bordered">
+    <tr>
+        <th>Management commitment</th>
+        <th>Rule adherence</th>
+        <th>Safety equipment</th>
+        <th>Training</th>
+        <th>Safety investigation</th>
+        <th>Safety rules</th>
+        <th>Safety employees</th>
+        <th>Hazard awareness</th>
+        <th>Safety budget</th>
+    </tr>
+    <tr>
+        {% for i in range(0,len) %}
+            {% if i==6 %}
+                {% if  k3[i] == 0 %}
+                <td>have not</td>
+                {% elif  k3[i] == 1 %}
+                <td>have</td>
+                {% endif %}
+            {% else %}
+                <td><span class="spcheck">{{k3[i]}}</span></td>
+            {% endif %}
+        {% endfor %}        
+    </tr>    
+    <tr>
+        {% for i in range(0,len) %}
+            {% if i==6 %}
+                {% if  k3[i] == 0 %}
+                    <td>No safety personnel required</td>
+                {% elif  k3[i] == 1 %}
+                    <td>Needs safety personnel</td>
+                {% endif %}
+            {% else %}
+                {% if k3[i] - itself[i] == 0 %}
+                    <td>0</td>
+                {% elif k3[i] - itself[i] > 0 %}
+                    <td><img src="{{url_for('static',filename='img/up.jpg')}}" class='imgup'/> <span class="spcheck">{{k3[i] - itself[i]}}</span></td>
+                {% elif k3[i] - itself[i] < 0 %}
+                    <td><img src="{{url_for('static',filename='img/down.png')}}" class='imgdown'/> <span class="spcheck">{{itself[i] - k3[i]}}</span></td>
+                {% endif %}
+            {% endif %}
+        {% endfor %} 
+        </tr>    
+</table>
+{% endif %}
+<div style="width:100%;padding:10px;">
+    
+</div>
+</div>
+{% endblock %}
+
+<script>
+    
+</script>
